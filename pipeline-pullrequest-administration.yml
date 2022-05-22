@@ -30,6 +30,21 @@ jobs:
           isOutput: true
           stripIdentifiers: false
 
+      - task: PowerShell@2
+        displayName: Add git commit message for SemVer
+        inputs:
+          targetType: inline
+          script: |
+            Write-Host "Configuring git author info.." -ForegroundColor Cyan
+            git config user.email "Azure DevOps pipeline"
+            git config user.name "Azure.Devops@pipeline.com"
+            Write-Host "Doing git checkout..." -ForegroundColor Cyan
+            git checkout -b $("$(System.PullRequest.SourceBranch)".replace('refs/heads/', ''))
+            Write-Host "Checking Pull Request description..." -ForegroundColor Cyan
+            $PRdesc = "$(RetrievePullRequestDescription.PullRequest.DescriptionContent)"
+            Write-Output $PRdesc
+
+
       # Add git commit message that will be picked up by GitVersion ("+semver: patch/minor/major")
       # Depending on the Pull Request description, where the developer has marked the type of change
       - task: PowerShell@2
