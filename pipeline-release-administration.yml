@@ -1,6 +1,7 @@
 trigger:
   - main
   - master
+  - develop
   
 pr: none  
 
