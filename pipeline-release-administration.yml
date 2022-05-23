@@ -1,9 +1,8 @@
 trigger:
   - main
   - master
-  - develop
   
-pr: none
+pr: none  
 
 pool:
   vmImage: ubuntu-latest
@@ -38,19 +37,19 @@ jobs:
 
 
       # Adds the tag for the calculated semantic version
-#       - task: PowerShell@2
-#         displayName: Adding git release tag
-#         inputs:
-#           targetType: inline
-#           script: |
-#             Write-Host "Configuring git author info.." -ForegroundColor Cyan
-#             git config user.email "Azure DevOps pipeline"
-#             git config user.name "Azure.Devops@pipeline.com"
-#             Write-Host "Adding git tag for release $(GitVersion.SemVer).." -ForegroundColor Cyan
-#             git tag -a $("v$(GitVersion.SemVer)") -m $("Release $(GitVersion.SemVer)")
-#             Write-Host "Doing git push.." -ForegroundColor Cyan
-#             git push --tags
-#             Write-Host "Done." -ForegroundColor Cyan
+      - task: PowerShell@2
+        displayName: Adding git release tag
+        inputs:
+          targetType: inline
+          script: |
+            Write-Host "Configuring git author info.." -ForegroundColor Cyan
+            git config user.email "Azure DevOps pipeline"
+            git config user.name "Azure.Devops@pipeline.com"
+            Write-Host "Adding git tag for release $(GitVersion.SemVer).." -ForegroundColor Cyan
+            git tag -a $("v$(GitVersion.SemVer)") -m $("Release $(GitVersion.SemVer)")
+            Write-Host "Doing git push.." -ForegroundColor Cyan
+            git push --tags
+            Write-Host "Done." -ForegroundColor Cyan
 
   ## Job to create release notes file and publish it to the wiki
 #   - job: CreateReleaseNotes
