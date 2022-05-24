@@ -48,8 +48,8 @@ jobs:
           targetType: inline
           script: |
             Write-Host "Configuring git author info.." -ForegroundColor Cyan
-            git config user.email "Azure DevOps pipeline"
-            git config user.name "Azure.Devops@pipeline.com"
+            #git config user.email "Azure DevOps pipeline"
+           # git config user.name "Azure.Devops@pipeline.com"
             Write-Host "Adding git tag for release $(GitVersion.SemVer).." -ForegroundColor Cyan
             git tag -a $("v$(GitVersion.SemVer)") -m $("Release $(GitVersion.SemVer)")
             Write-Host "Doing git push.." -ForegroundColor Cyan
