@@ -6,6 +6,9 @@ pr: none
 
 pool:
   vmImage: ubuntu-latest
+  
+variables:
+  system_accesstoken: $(System.AccessToken)
 
 ## Job to create release and add tag
 jobs:
@@ -38,6 +41,8 @@ jobs:
 
       # Adds the tag for the calculated semantic version
       - task: PowerShell@2
+        env:
+            system_accesstoken: $(System.AccessToken)
         displayName: Adding git release tag
         inputs:
           targetType: inline
