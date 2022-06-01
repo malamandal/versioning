@@ -78,7 +78,7 @@ jobs:
       - task: WikiUpdaterTask@1
         displayName: "Publish to the wiki"
         inputs:
-          repo: "https://dev.azure.com/devruijter/playground/_git/playground.wiki" #REPLACE THIS!! NB. use _git instead of _wiki/wikis in the uri
+          repo: "https://dev.azure.com/malareny1991/versioning/_wiki/wikis/versioning.wiki/" #REPLACE THIS!! NB. use _git instead of _wiki/wikis in the uri
           filename: "Release-Notes.md" #Note: want a space in the name of the page? Use a '-' here!
           replaceFile: false
           appendToFile: false
