@@ -64,7 +64,7 @@ jobs:
         inputs:
           outputfile: '$(System.DefaultWorkingDirectory)\releasenotes.md'
           templateLocation: File
-          templatefile: ".azuredevops/release-notes-template.md"
+          templatefile: ".github/release-notes-template.md"
           dumpPayloadToConsole: false
           dumpPayloadToFile: false
           replaceFile: True
