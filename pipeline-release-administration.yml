@@ -73,19 +73,25 @@ jobs:
           getIndirectPullRequests: False
           stopOnError: True
           considerPartiallySuccessfulReleases: False
+          
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '''$(System.DefaultWorkingDirectory)\releasenotes.md'
+          ArtifactName: 'releasenotes'
+          publishLocation: 'Container'
 
       # Publishes the release notes in the project wiki
-      - task: WikiUpdaterTask@1
-        displayName: "Publish to the wiki"
-        inputs:
-          repo: "https://dev.azure.com/malareny1991/versioning/_wiki/wikis/versioning.wiki/" #REPLACE THIS!! NB. use _git instead of _wiki/wikis in the uri
-          filename: "Release-Notes.md" #Note: want a space in the name of the page? Use a '-' here!
-          replaceFile: false
-          appendToFile: false
-          dataIsFile: true
-          sourceFile: '$(System.DefaultWorkingDirectory)\releasenotes.md'
-          message: "Update from Pipeline"
-          gitname: $(Release.RequestedFor)
-          gitemail: $(Release.RequestedForEmail)
-          useAgentToken: true
-          localpath: '$(System.DefaultWorkingDirectory)\repo'
+      # - task: WikiUpdaterTask@1
+      #   displayName: "Publish to the wiki"
+      #   inputs:
+      #     repo: "https://dev.azure.com/malareny1991/versioning/_wiki/wikis/versioning.wiki/" #REPLACE THIS!! NB. use _git instead of _wiki/wikis in the uri
+      #     filename: "Release-Notes.md" #Note: want a space in the name of the page? Use a '-' here!
+      #     replaceFile: false
+      #     appendToFile: false
+      #     dataIsFile: true
+      #     sourceFile: '$(System.DefaultWorkingDirectory)\releasenotes.md'
+      #     message: "Update from Pipeline"
+      #     gitname: $(Release.RequestedFor)
+      #     gitemail: $(Release.RequestedForEmail)
+      #     useAgentToken: true
+      #     localpath: '$(System.DefaultWorkingDirectory)\repo'
