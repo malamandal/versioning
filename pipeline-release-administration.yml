@@ -76,7 +76,7 @@ jobs:
           
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: '''$(System.DefaultWorkingDirectory)\releasenotes.md'
+          PathtoPublish: '/home/vsts/work/1/s\releasenotes.md'
           ArtifactName: 'releasenotes'
           publishLocation: 'Container'
 
