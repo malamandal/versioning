@@ -93,4 +93,4 @@ jobs:
           vstsFeedPublish: 'f3ca8ee4-f43a-431b-9416-28cd53395877/24638104-c6a7-4ea0-957b-b8c4d2916c6d'
           vstsFeedPackagePublish: 'DI'
           versionOption: 'custom'
-          versionPublish: '4.4'
+          versionPublish: '4.4.0'
