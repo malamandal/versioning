@@ -45,7 +45,7 @@ branches:
     regex: ^develop$
     mode: ContinuousDeployment
     tag: alpha
-    increment: Minor
+    increment: None
     source-branches: []
     prevent-increment-of-merged-branch-version: false
     track-merge-target: true
