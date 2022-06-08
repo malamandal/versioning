@@ -48,8 +48,8 @@ jobs:
             Write-Host "Configuring git author info.." -ForegroundColor Cyan
             git config user.email "Azure DevOps pipeline"
             git config user.name "Azure.Devops@pipeline.com"
-            Write-Host "Adding git tag for release ${{ parameters.compname }}-$(GitVersion.SemVer).." -ForegroundColor Cyan
-            git tag -a $("${{ parameters.compname }}-v$(GitVersion.SemVer)") -m $("Release ${{ parameters.compname }}-$(GitVersion.SemVer)")
+            Write-Host "Adding git tag for release DI-$(GitVersion.SemVer).." -ForegroundColor Cyan
+            git tag -a $("DI-v$(GitVersion.SemVer)") -m $("Release DI-$(GitVersion.SemVer)")
             Write-Host "Doing git push.." -ForegroundColor Cyan
             git push --tags
             Write-Host "Done." -ForegroundColor Cyan
