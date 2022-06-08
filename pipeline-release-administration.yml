@@ -91,6 +91,6 @@ jobs:
           publishDirectory: '/home/vsts/work/1/s/releasenotes.md'
           feedsToUsePublish: 'internal'
           vstsFeedPublish: 'f3ca8ee4-f43a-431b-9416-28cd53395877/24638104-c6a7-4ea0-957b-b8c4d2916c6d'
-          vstsFeedPackagePublish: 'DI'
+          vstsFeedPackagePublish: 'di'
           versionOption: 'custom'
           versionPublish: '4.4.0'
