@@ -2,3 +2,4 @@ test 4 release
 ...
 test
 1
+bug fix
