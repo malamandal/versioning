@@ -1,6 +1,7 @@
 # Data Integration - 🚀 Release v{{buildDetails.buildNumber}} 
 
 ## What’s new and improved :
+This is test
      <Common name of feature>: <Description from user’s point of view. What will the users get from this feature?)> <Link to additional info, how-to, wiki page, user manual, etc.>
  
 ## What’s fixed : 
