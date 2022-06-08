@@ -38,21 +38,18 @@ jobs:
       - pwsh: |
           Write-Host "##vso[build.updatebuildnumber]$(GitVersion.SemVer)"
         displayName: Update Build.BuildNumber
-
-
       # Adds the tag for the calculated semantic version
       - task: PowerShell@2
-        env:
-            system_accesstoken: $(System.AccessToken)
-        displayName: Adding git release tag
+        displayName: Adding git release tag for databricks
+        condition: contains(variables['Build.SourceBranch'], 'release_v')
         inputs:
           targetType: inline
           script: |
             Write-Host "Configuring git author info.." -ForegroundColor Cyan
             git config user.email "Azure DevOps pipeline"
             git config user.name "Azure.Devops@pipeline.com"
-            Write-Host "Adding git tag for release $(GitVersion.SemVer).." -ForegroundColor Cyan
-            git tag -a $("v$(GitVersion.SemVer)") -m $("Release $(GitVersion.SemVer)")
+            Write-Host "Adding git tag for release ${{ parameters.compname }}-$(GitVersion.SemVer).." -ForegroundColor Cyan
+            git tag -a $("${{ parameters.compname }}-v$(GitVersion.SemVer)") -m $("Release ${{ parameters.compname }}-$(GitVersion.SemVer)")
             Write-Host "Doing git push.." -ForegroundColor Cyan
             git push --tags
             Write-Host "Done." -ForegroundColor Cyan
@@ -61,13 +58,14 @@ jobs:
   - job: CreateReleaseNotes
     displayName: Creating release notes
     dependsOn: CalculateVersion
+    condition: contains(variables['Build.SourceBranch'], 'release_v')
 
     steps:
       # Generates a release notes file
       - task: XplatGenerateReleaseNotes@3
         displayName: "Generate release notes"
         inputs:
-          outputfile: '$(System.DefaultWorkingDirectory)\releasenotes.md'
+          outputfile: '/home/vsts/work/1/s/releasenotes.md'
           templateLocation: File
           templatefile: ".github/release-notes-template.md"
           dumpPayloadToConsole: false
@@ -78,25 +76,10 @@ jobs:
           getIndirectPullRequests: False
           stopOnError: True
           considerPartiallySuccessfulReleases: False
-          
+
+
       - task: PublishBuildArtifacts@1
         inputs:
-          PathtoPublish: '/home/vsts/work/1/s\releasenotes.md'
-          ArtifactName: 'releasenotes'
+          PathtoPublish: '/home/vsts/work/1/s/releasenotes.md'
+          ArtifactName: 'ReleaseNotes'
           publishLocation: 'Container'
-
-      # Publishes the release notes in the project wiki
-      # - task: WikiUpdaterTask@1
-      #   displayName: "Publish to the wiki"
-      #   inputs:
-      #     repo: "https://dev.azure.com/malareny1991/versioning/_wiki/wikis/versioning.wiki/" #REPLACE THIS!! NB. use _git instead of _wiki/wikis in the uri
-      #     filename: "Release-Notes.md" #Note: want a space in the name of the page? Use a '-' here!
-      #     replaceFile: false
-      #     appendToFile: false
-      #     dataIsFile: true
-      #     sourceFile: '$(System.DefaultWorkingDirectory)\releasenotes.md'
-      #     message: "Update from Pipeline"
-      #     gitname: $(Release.RequestedFor)
-      #     gitemail: $(Release.RequestedForEmail)
-      #     useAgentToken: true
-      #     localpath: '$(System.DefaultWorkingDirectory)\repo'
