@@ -32,7 +32,7 @@ branches:
     is-release-branch: true
   release:
     regex: ^release$
-    mode: ContinuousDelivery
+    mode: ContinuousDeployment
     source-branches: []
     tag: beta
     increment: Patch
