@@ -1,6 +1,7 @@
 trigger:
   - develop
   - release
+  - release_v4.4
   
 pr: none  
 
